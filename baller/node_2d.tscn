@@ -1,0 +1,196 @@
+[gd_scene load_steps=16 format=3 uid="uid://cxe0xr16d2fjx"]
+
+[ext_resource type="Script" path="res://character_body_2d.gd" id="1_ofpla"]
+[ext_resource type="Texture2D" uid="uid://3i1i81f3o8ru" path="res://charaters/icon.svg" id="2_qqq3x"]
+[ext_resource type="Script" path="res://hearts.gd" id="3_fe6ur"]
+[ext_resource type="Texture2D" uid="uid://cpd2q8vq1t10s" path="res://charaters/icon.png" id="3_j6eay"]
+[ext_resource type="Texture2D" uid="uid://c3sd40b0gy60h" path="res://UI sprites/health.png" id="4_rqcyi"]
+[ext_resource type="Texture2D" uid="uid://dpw808okmy0k0" path="res://UI sprites/health2.png" id="5_mbxe6"]
+[ext_resource type="Texture2D" uid="uid://6wsyea46knu" path="res://UI sprites/health3.png" id="5_vk6t8"]
+[ext_resource type="Script" path="res://dummy.gd" id="7_2nqay"]
+[ext_resource type="Texture2D" uid="uid://buki20666rbkv" path="res://this1.png" id="7_p662f"]
+[ext_resource type="Texture2D" uid="uid://ci4om1a1p8jv1" path="res://this2.png" id="8_vjxi2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vnl5p"]
+size = Vector2(134, 137)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2ojm2"]
+radius = 168.0
+height = 336.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kadku"]
+size = Vector2(69, 59)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xlmd2"]
+size = Vector2(127, 129)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_lq1el"]
+radius = 153.0
+height = 306.0
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(200, 306)
+script = ExtResource("1_ofpla")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(-2, -2)
+texture = ExtResource("2_qqq3x")
+
+[node name="player hitbox" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-2, -1.5)
+shape = SubResource("RectangleShape2D_vnl5p")
+
+[node name="attack box" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/attack box"]
+shape = SubResource("CapsuleShape2D_2ojm2")
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+limit_left = -10000
+limit_top = -10000
+limit_right = 10000
+limit_bottom = 10000
+
+[node name="UI" type="Node2D" parent="CharacterBody2D"]
+position = Vector2(-569, -328)
+
+[node name="hearts" type="Node2D" parent="CharacterBody2D/UI"]
+position = Vector2(5, 5)
+script = ExtResource("3_fe6ur")
+
+[node name="heart3" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+offset_left = 124.0
+offset_top = 10.0
+offset_right = 171.0
+offset_bottom = 56.0
+texture = ExtResource("4_rqcyi")
+
+[node name="heart2" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+offset_left = 64.0
+offset_top = 10.0
+offset_right = 111.0
+offset_bottom = 56.0
+texture = ExtResource("4_rqcyi")
+
+[node name="heart1" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 56.0
+texture = ExtResource("4_rqcyi")
+
+[node name="heart1-5" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 50.0
+offset_bottom = 56.0
+texture = ExtResource("5_mbxe6")
+
+[node name="heart2-5" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 63.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 56.0
+texture = ExtResource("5_mbxe6")
+
+[node name="heart3-5" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 124.0
+offset_top = 10.0
+offset_right = 171.0
+offset_bottom = 56.0
+texture = ExtResource("5_mbxe6")
+
+[node name="heart1-0" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 4.0
+offset_top = 11.0
+offset_right = 51.0
+offset_bottom = 57.0
+texture = ExtResource("5_vk6t8")
+
+[node name="heart2-0" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 63.0
+offset_top = 10.0
+offset_right = 110.0
+offset_bottom = 56.0
+texture = ExtResource("5_vk6t8")
+
+[node name="heart3-0" type="NinePatchRect" parent="CharacterBody2D/UI/hearts"]
+visible = false
+offset_left = 125.0
+offset_top = 10.0
+offset_right = 172.0
+offset_bottom = 56.0
+texture = ExtResource("5_vk6t8")
+
+[node name="mana bar" type="TextureProgressBar" parent="CharacterBody2D"]
+offset_left = -567.0
+offset_top = -300.0
+offset_right = -367.0
+offset_bottom = -172.0
+max_value = 25.0
+value = 25.0
+texture_under = ExtResource("7_p662f")
+texture_progress = ExtResource("8_vjxi2")
+
+[node name="dash cooldown" type="Timer" parent="CharacterBody2D"]
+wait_time = 2.0
+
+[node name="dash time" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.2
+
+[node name="attack time" type="Timer" parent="CharacterBody2D"]
+wait_time = 0.2
+
+[node name="attack cooldown" type="Timer" parent="CharacterBody2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(583, 110)
+
+[node name="Icon2" type="Sprite2D" parent="Area2D"]
+position = Vector2(2.00006, -3)
+scale = Vector2(0.539063, 0.460938)
+texture = ExtResource("2_qqq3x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(2.5, -3.5)
+shape = SubResource("RectangleShape2D_kadku")
+
+[node name="dummy" type="CharacterBody2D" parent="."]
+position = Vector2(897, 345)
+script = ExtResource("7_2nqay")
+
+[node name="Icon" type="Sprite2D" parent="dummy"]
+position = Vector2(13.3751, -9.87497)
+scale = Vector2(0.429167, 0.4275)
+texture = ExtResource("3_j6eay")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dummy"]
+position = Vector2(12.875, -10.375)
+shape = SubResource("RectangleShape2D_xlmd2")
+
+[node name="can attack" type="Area2D" parent="dummy"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dummy/can attack"]
+position = Vector2(13, -10)
+shape = SubResource("CapsuleShape2D_lq1el")
+
+[node name="I seconds" type="Timer" parent="dummy"]
+wait_time = 0.5
+
+[connection signal="body_entered" from="CharacterBody2D/attack box" to="dummy" method="_on_attack_box_body_entered"]
+[connection signal="timeout" from="CharacterBody2D/dash cooldown" to="CharacterBody2D" method="_on_timer_2_timeout"]
+[connection signal="timeout" from="CharacterBody2D/dash time" to="CharacterBody2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="CharacterBody2D/attack time" to="CharacterBody2D" method="_on_attack_time_timeout"]
+[connection signal="timeout" from="CharacterBody2D/attack cooldown" to="CharacterBody2D" method="_on_attack_cooldown_timeout"]
+[connection signal="body_entered" from="Area2D" to="CharacterBody2D" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="dummy/can attack" to="CharacterBody2D" method="_on_can_attack_body_entered"]
+[connection signal="body_exited" from="dummy/can attack" to="CharacterBody2D" method="_on_can_attack_body_exited"]
+[connection signal="timeout" from="dummy/I seconds" to="dummy" method="_on_i_seconds_timeout"]
